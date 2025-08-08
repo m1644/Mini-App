@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pizza Mini App</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>🍕 Pizza Mini App</h1>
+      <nav>
+        <button id="tab-pizza" class="tab active">Пицца</button>
+        <button id="tab-drinks" class="tab">Напитки</button>
+        <button id="tab-cart" class="tab">Корзина 🛒 <span id="cart-count">0</span></button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="list" class="list"></section>
+
+      <section id="cart" class="cart hidden">
+        <h2>Ваша корзина</h2>
+        <div id="cart-items"></div>
+        <div id="summary" class="summary">
+          <div class="row"><span>Сумма</span><span id="sum">0₽</span></div>
+          <div class="row"><span>Скидка</span><span id="discount">0₽</span></div>
+          <div class="row total"><span>Итого</span><span id="total">0₽</span></div>
+        </div>
+        <div class="checkout">
+          <input id="address" type="text" placeholder="Адрес доставки" />
+          <input id="phone" type="text" placeholder="Телефон" />
+          <select id="payment">
+            <option value="cash">Наличные</option>
+            <option value="card">Карта</option>
+          </select>
+          <input id="promo" type="text" placeholder="Промокод (необязательно)" />
+          <button id="btn-order" class="primary">Оформить заказ</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
