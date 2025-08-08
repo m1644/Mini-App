@@ -23,6 +23,18 @@
 3. Скопируйте `.env.example` в `.env` и заполните значения
 4. Запустите `python main.py`
 
+### Тестирование на локальном ПК (без Telegram)
+- Установите в `.env` переменную `RUN_WEB_ONLY=true` и (по желанию) оставьте `WEBAPP_URL=http://localhost:8000`.
+- Откройте в браузере `http://localhost:8000`.
+- Mini App будет получать меню с `/api/menu` и отправлять оформление заказа POST запросом на `/api/order`.
+- В Telegram-режиме Mini App отправляет данные через `Telegram.WebApp.sendData`, а локально — через REST API.
+
+### Запуск Telegram-бота (опционально)
+- Установите зависимости для бота: `pip install -r bot-requirements.txt`
+- Укажите `BOT_TOKEN` и, при необходимости, `MANAGER_CHAT_ID` в `.env`.
+- Установите `RUN_WEB_ONLY=false` или просто задайте `BOT_TOKEN`.
+- Запустите `python main.py` и отправьте `/start` боту в Telegram.
+
 ## Структура
 - `main.py` — запуск FastAPI и aiogram (параллельно)
 - `bot_config.py` — меню, изображения, промокоды

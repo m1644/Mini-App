@@ -146,7 +146,7 @@ inputPromo.addEventListener('input', () => {
   if (!elCart.classList.contains('hidden')) renderCart();
 });
 
-btnOrder.addEventListener('click', () => {
+btnOrder.addEventListener('click', async () => {
   const address = (inputAddress.value || '').trim();
   const phone = (inputPhone.value || '').trim();
   const payment = selectPayment.value;
@@ -173,9 +173,17 @@ btnOrder.addEventListener('click', () => {
       tg.sendData(JSON.stringify(payload));
       tg.close();
     } else {
-      // Для браузерного теста
-      console.log('Order payload', payload);
-      alert('Данные заказа отправлены. Откройте Mini App в Telegram, чтобы завершить.');
+      const res = await fetch('/api/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Server error');
+      const data = await res.json();
+      alert(`Заказ оформлен! №${data.orderId}. Итог: ${data.finalTotal}₽`);
+      cart.clear();
+      updateCartCount();
+      switchTab('pizza');
     }
   } catch (e) {
     console.error(e);
